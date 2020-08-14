@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'noauth.base.html.twig' %}
 
 {% block title %}Hello RegistrationController!{% endblock %}
 
@@ -8,13 +8,17 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+<div class="middle-box text-center loginscreen   animated fadeInDown">
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/xampp/htdocs/ceoapp/src/Controller/RegistrationController.php'|file_link(0) }}">src/Controller/RegistrationController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/xampp/htdocs/ceoapp/templates/registration/index.html.twig'|file_link(0) }}">templates/registration/index.html.twig</a></code></li>
-    </ul>
+    <div><h1 class="logo-name">IN+</h1></div>
+    <h3>Register to IN+</h3>
+    <p>Create account to see it in action.</p>
+
+    <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
+
+    <a href="{{ path('app_login') }}" class="btn btn-dark">Back</a>
+
+
 </div>
+
 {% endblock %}

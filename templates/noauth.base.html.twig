@@ -4,13 +4,12 @@
         <meta charset="UTF-8">
         <link rel="stylesheet" href="{{ asset('assets/css/bootstrap.min.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/font-awesome/css/font-awesome.css') }}">
-        <link rel="stylesheet" href="{{ asset('assets/css/plugins/iCheck/custom.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
-    <body>
+    <body class="gray-bg">
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}
     </body>
@@ -18,8 +17,4 @@
     <script src="{{ asset('assets/js/jquery-3.1.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/bootstrap.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/iCheck/icheck.min.js') }}"></script>
-    <script src="{{ asset('assets/js/plugins/touchpunch/jquery.ui.touch-punch.min.js') }}"></script>
 </html>
