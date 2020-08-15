@@ -5,7 +5,6 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Validator\Constraints;
 use Symfony\Component\Validator\Constraints\NotBlank;
 use Symfony\Component\Validator\Mapping\ClassMetadata;
 
@@ -142,7 +141,7 @@ class User implements UserInterface
         return $this->name;
     }
 
-    public function setName(string $name): string
+    public function setName(string $name): self
     {
         $this->name = $name;
 
@@ -154,7 +153,7 @@ class User implements UserInterface
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): string
+    public function setLastname(string $lastname): self
     {
         $this->lastname = $lastname;
 

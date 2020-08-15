@@ -1,6 +1,6 @@
 {% extends 'noauth.base.html.twig' %}
 
-{% block title %}Hello RegistrationController!{% endblock %}
+{% block title %}Start work with CEOapp!{% endblock %}
 
 {% block body %}
 <style>
@@ -10,21 +10,19 @@
 
 <div class="middle-box loginscreen   animated fadeInDown">
 
-    <div><h1 class="logo-name">IN+</h1></div>
+    <div class="text-center"><h1 class="logo-name">IN+</h1>
     <h3>Register to IN+</h3>
     <p>Create account to see it in action.</p>
-
+    </div>
     {% for message in app.flashes('warning') %}
-        <div class="alert alert-danger">
+        <div class="alert alert-danger text-center">
             {{ message }}
         </div>
     {% endfor %}
 
-    {{ form }}
+    {{ form(form) }}
 
-    <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
-
-    <a href="{{ path('app_login') }}" class="btn btn-dark">Back</a>
+    <a href="{{ path('app_login') }}" class="btn btn-dark block full-width m-b">Back</a>
 
 
 </div>
