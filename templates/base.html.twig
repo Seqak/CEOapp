@@ -11,8 +11,88 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+    <div id="wrapper">
+
+        <nav class="navbar-default navbar-static-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav metismenu" id="side-menu">
+                    <li class="nav-header">
+                        <div class="dropdown profile-element">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <span class="block m-t-xs font-bold">{{ app.user.name }} {{ app.user.lastname }}</span>
+                                <span class="text-muted text-xs block">menu <b class="caret"></b></span>
+                            </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a class="dropdown-item" href="{{ path('app_logout') }}">Wyloguj</a></li>
+                            </ul>
+                        </div>
+                        <div class="logo-element">
+                            IN+
+                        </div>
+                    </li>
+                    <li class="active">
+                        <a href="#"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span> </a>
+                    </li>
+{#                    <li class="">#}
+{#                        <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Dokumenty</span> </a>#}
+{#                        <ul class="nav nav-second-level collapse">#}
+{#                            <li class="">#}
+{#                                <a href="#">Dodaj dokument</a>#}
+{#                            </li>#}
+{#                            <li class="">#}
+{#                                <a href="#">Lista dokumentów</a>#}
+{#                            </li>#}
+{#                        </ul>#}
+{#                    </li>#}
+                </ul>
+
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="gray-bg">
+            <div class="row border-bottom">
+                <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
+                    <div class="navbar-header">
+                        <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
+                        <form role="search" class="navbar-form-custom" method="post" action="#">
+
+                        </form>
+                    </div>
+                    <ul class="nav navbar-top-links navbar-right">
+                        <li>
+                            <a href="{{ path('app_logout') }}">
+                                <i class="fa fa-sign-out"></i> Wyloguj
+                            </a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+            <div class="wrapper wrapper-content animated fadeInRight">
+
+                <div class="row wrapper border-bottom white-bg page-heading p-xs">
+                    <div class="col-md-12 row">
+                        <div class="col-11">
+                            <h2 class="m-t-sm m-b-xss">Dashboard</h2>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="wrapper wrapper-content">
+
+                    <div class="row">
+
+
+                        {% block body %}{% endblock %}
+                        {% block javascripts %}{% endblock %}
+
+
+                    </div>
+                </div>
+            </div>
+
     </body>
 
     <script src="{{ asset('assets/js/jquery-3.1.1.min.js') }}"></script>
@@ -22,4 +102,6 @@
     <script src="{{ asset('assets/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/iCheck/icheck.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/touchpunch/jquery.ui.touch-punch.min.js') }}"></script>
+    <script src="{{ asset('assets/js/inspinia.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/pace/pace.min.js') }}"></script>
 </html>
