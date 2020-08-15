@@ -8,11 +8,19 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-<div class="middle-box text-center loginscreen   animated fadeInDown">
+<div class="middle-box loginscreen   animated fadeInDown">
 
     <div><h1 class="logo-name">IN+</h1></div>
     <h3>Register to IN+</h3>
     <p>Create account to see it in action.</p>
+
+    {% for message in app.flashes('warning') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {{ form }}
 
     <p class="m-t"> <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small> </p>
 
