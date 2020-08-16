@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Add Document{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+
+
+         <div class="col-md-6 col-lg-6 no-paddings">
+            <div class="ibox " s>
+               <div class="ibox-title">
+                  <h3>Dane dokumentu</h3>
+               </div>
+               <div class="ibox-content">
+
+                   {{ form(form) }}
+
+               <div class="ibox-footer">
+
+                  <a href="" class="btn btn-white btn-sm">Anuluj</a>
+                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addPostStatus133" onclick="currentTime(&quot;133&quot;)" value="133">Zapisz</button>
+               </div>
+            </div>
+         </div>
+
+      </div>
+
+{% endblock %}

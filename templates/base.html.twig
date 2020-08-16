@@ -31,20 +31,20 @@
                             IN+
                         </div>
                     </li>
-                    <li class="active">
-                        <a href="#"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span> </a>
+                    <li class="">
+                        <a href="{{ path('dashboard') }}"><i class="fa fa-home"></i> <span class="nav-label">Dashboard</span> </a>
                     </li>
-{#                    <li class="">#}
-{#                        <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Dokumenty</span> </a>#}
-{#                        <ul class="nav nav-second-level collapse">#}
-{#                            <li class="">#}
-{#                                <a href="#">Dodaj dokument</a>#}
-{#                            </li>#}
+                    <li class="">
+                        <a href="#"><i class="fa fa-file-text"></i> <span class="nav-label">Dokumenty</span> </a>
+                        <ul class="nav nav-second-level collapse">
+                            <li class="">
+                                <a href="{{ path('document.add') }}">Dodaj dokument</a>
+                            </li>
 {#                            <li class="">#}
 {#                                <a href="#">Lista dokumentów</a>#}
 {#                            </li>#}
-{#                        </ul>#}
-{#                    </li>#}
+                        </ul>
+                    </li>
                 </ul>
 
             </div>
@@ -72,7 +72,7 @@
 
             <div class="row wrapper border-bottom white-bg page-heading m-t-md">
                 <div class="col-md-8">
-                    <h2 class="m-b-none">Dashboard</h2>
+                    <h2 class="m-b-none">{{ pagename }}</h2>
                 </div>
             </div>
 
