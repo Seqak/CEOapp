@@ -23,8 +23,27 @@ class DocumentController extends AbstractController
 
         $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $data = $form->getData();
+            $file = $request->files->get('document')["attachment"];
+
+//            echo "<pre>";
+//            var_dump($file);die;
+
+            $uploads_directory = $this->getParameter('uploads_directory');
+
+            $filename = md5(uniqid()) . '.' . $file->guessExtension();
+
+            $file->move(
+                $uploads_directory,
+                $filename
+
+            );
+        }
+
         return $this->render('document/add.html.twig', [
-            'pagename' => 'Dodaj dokument',
+            'pagename' => 'Add document',
             'form' => $form->createView()
 
         ]);

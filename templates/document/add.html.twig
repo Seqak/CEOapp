@@ -12,22 +12,35 @@
 
 
          <div class="col-md-6 col-lg-6 no-paddings">
-            <div class="ibox " s>
+             {{ form_start(form) }}
+            <div class="ibox ">
                <div class="ibox-title">
-                  <h3>Dane dokumentu</h3>
+                  <h3>Document details</h3>
                </div>
                <div class="ibox-content">
 
-                   {{ form(form) }}
+                {{ form_row(form.name) }}
 
-               <div class="ibox-footer">
+                   {{ form_row(form.number) }}
+                   {{ form_row(form.documentType) }}
+                   {{ form_row(form.attachment) }}
+                   {{ form_row(form.description) }}
 
-                  <a href="" class="btn btn-white btn-sm">Anuluj</a>
-                  <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#addPostStatus133" onclick="currentTime(&quot;133&quot;)" value="133">Zapisz</button>
                </div>
-            </div>
+               <div class="ibox-footer">
+                  <a href="#" class="btn btn-white ">Anuluj</a>
+                  <button type="submit" class="btn btn-primary">Save</button>
+               </div>
+
+                {{ form_end(form) }}
          </div>
 
       </div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
 {% endblock %}
