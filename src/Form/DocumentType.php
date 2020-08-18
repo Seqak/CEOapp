@@ -45,7 +45,9 @@ class DocumentType extends AbstractType
                             'application/x-pdf',
                             'image/png',
                             'image/jpeg',
-                            'image/jpg'
+                            'image/jpg',
+                            'application/vnd.ms-excel',
+                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
                         ],
                         'mimeTypesMessage' => 'Please upload a valid PDF document',
                     ])

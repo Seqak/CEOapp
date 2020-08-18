@@ -31,11 +31,14 @@ class DocumentController extends AbstractController
             $uploads_directory = $this->getParameter('uploads_directory');
 
             $fileOrignalName = $request->files->get('document')['attachment']->getClientOriginalName();
+            $addDate = $request->files->get('document')['attachment']->getcTime();
 
-            $file->move(
-                $uploads_directory,
-                $fileOrignalName
-            );
+            dump($addDate);
+
+//            $file->move(
+//                $uploads_directory,
+//                $fileOrignalName
+//            );
         }
 
         return $this->render('document/add.html.twig', [
