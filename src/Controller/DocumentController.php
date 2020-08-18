@@ -27,25 +27,20 @@ class DocumentController extends AbstractController
         {
             $data = $form->getData();
             $file = $request->files->get('document')["attachment"];
-
-//            echo "<pre>";
-//            var_dump($file);die;
-
+            
             $uploads_directory = $this->getParameter('uploads_directory');
 
-            $filename = md5(uniqid()) . '.' . $file->guessExtension();
+            $fileOrignalName = $request->files->get('document')['attachment']->getClientOriginalName();
 
             $file->move(
                 $uploads_directory,
-                $filename
-
+                $fileOrignalName
             );
         }
 
         return $this->render('document/add.html.twig', [
             'pagename' => 'Add document',
             'form' => $form->createView()
-
         ]);
     }
 }

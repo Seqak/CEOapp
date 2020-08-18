@@ -11,8 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotNull;
 
 class DocumentType extends AbstractType
 {
@@ -20,9 +20,10 @@ class DocumentType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
+                'label' => 'Name*',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'Wypełnij to chuju.'
+                        'message' => 'This field is required.'
                     ])
                 ]
             ])
@@ -30,12 +31,25 @@ class DocumentType extends AbstractType
                 'label' => 'Document number'
             ])
             ->add('documentType', EntityType::class, [
+                'label' => 'Document type*',
                 'class' => 'App\Entity\DocumentTypes'
             ])
             ->add('attachment', FileType::class, [
                 'mapped' => false,
-                'required' => false
-            ])
+                'required' => false,
+                'constraints' => [
+                    new File([
+                        'maxSize' => '15360k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                            'image/png',
+                            'image/jpeg',
+                            'image/jpg'
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    ])
+            ]])
             ->add('description')
         ;
     }
