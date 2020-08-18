@@ -25,20 +25,39 @@ class DocumentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-            $data = $form->getData();
             $file = $request->files->get('document')["attachment"];
-            
-            $uploads_directory = $this->getParameter('uploads_directory');
 
-            $fileOrignalName = $request->files->get('document')['attachment']->getClientOriginalName();
-            $addDate = $request->files->get('document')['attachment']->getcTime();
+            if ($file !== null){
 
-            dump($addDate);
+                $uploads_directory = $this->getParameter('uploads_directory');
+                $extension = $request->files->get('document')['attachment']->guessExtension();
 
-//            $file->move(
-//                $uploads_directory,
-//                $fileOrignalName
-//            );
+                $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . "_" . random_int(1000,9999) . '.' . $extension;
+
+                $file->move(
+                    $uploads_directory,
+                    $filename
+                );
+
+                $document->setAddDate();
+                $document->setFileName($filename);
+                $document->setAddDate();
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($document);
+                $em->flush();
+            }
+            else
+            {
+                $document->setAddDate();
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($document);
+                $em->flush();
+            }
+
+            $this->addFlash('success', 'The document was added successfully');
+//            return $this->redirect($this->generateUrl('path.to.show'));
         }
 
         return $this->render('document/add.html.twig', [

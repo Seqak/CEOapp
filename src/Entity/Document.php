@@ -23,7 +23,7 @@ class Document
     private $name;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="integer")
      */
     private $addDate;
 
@@ -64,14 +64,17 @@ class Document
         return $this;
     }
 
-    public function getAddDate(): ?\DateTimeInterface
+    public function getAddDate(): ?int
     {
         return $this->addDate;
     }
 
-    public function setAddDate(\DateTimeInterface $addDate): self
+    public function setAddDate(): self
     {
-        $this->addDate = $addDate;
+        $date = new \DateTime("now");
+        $currentTime =  $date->getTimestamp();
+
+        $this->addDate = $currentTime;
 
         return $this;
     }

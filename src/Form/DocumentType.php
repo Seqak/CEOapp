@@ -28,7 +28,8 @@ class DocumentType extends AbstractType
                 ]
             ])
             ->add('number', TextType::class, [
-                'label' => 'Document number'
+                'label' => 'Document number',
+                'required' => false,
             ])
             ->add('documentType', EntityType::class, [
                 'label' => 'Document type*',
@@ -47,9 +48,12 @@ class DocumentType extends AbstractType
                             'image/jpeg',
                             'image/jpg',
                             'application/vnd.ms-excel',
-                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+                            'application/msword',
+                            'application/vnd.openxmlformats-officedocument.wordprocessingml.document'.
+                            'text/csv'
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                        'mimeTypesMessage' => 'Please upload a valid type of document',
                     ])
             ]])
             ->add('description')
