@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Document;
 use App\Form\DocumentType;
+use App\Repository\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
@@ -57,7 +58,7 @@ class DocumentController extends AbstractController
             }
 
             $this->addFlash('success', 'The document was added successfully');
-//            return $this->redirect($this->generateUrl('path.to.show'));
+            return $this->redirect($this->generateUrl('document.list'));
         }
 
         return $this->render('document/add.html.twig', [
@@ -65,4 +66,47 @@ class DocumentController extends AbstractController
             'form' => $form->createView()
         ]);
     }
+
+
+    /**
+     * @Route("/list", name="list")
+     */
+    public function list(DocumentRepository $documentRepository)
+    {
+
+        $documents = $documentRepository->findBy(array(),
+            array( 'addDate' => 'DESC')
+        );
+
+
+        return $this->render('document/list.html.twig', [
+            'pagename' => 'Documents list',
+            'documents' => $documents
+
+        ]);
+    }
+
+
+    /**
+     * @Route("/edit/{id}", name="edit")
+     */
+    public function edit($id, Request $request, DocumentRepository $documentRepository)
+    {
+        $document = $documentRepository->findOneBy(array(
+            'id' => $id
+        ));
+
+        $form = $this->createForm(DocumentType::class, $document);
+        $form->handleRequest($request);
+
+        $filename = $form->getData()->getFileName();
+
+        return $this->render('document/edit.html.twig', [
+            'pagename' => 'Edit document',
+            'form' => $form->createView(),
+            'filename' => $filename
+        ]);
+
+    }
+
 }

@@ -7,6 +7,8 @@
         <link rel="stylesheet" href="{{ asset('assets/css/plugins/iCheck/custom.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/animate.css') }}">
         <link rel="stylesheet" href="{{ asset('assets/css/style.css') }}">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="{{ asset('assets/css/plugins/toastr/toastr.min.css') }}">
         <title>{% block title %}Welcome!{% endblock %}</title>
         {% block stylesheets %}{% endblock %}
     </head>
@@ -40,9 +42,9 @@
                             <li class="">
                                 <a href="{{ path('document.add') }}">Add document</a>
                             </li>
-{#                            <li class="">#}
-{#                                <a href="#">Lista dokumentów</a>#}
-{#                            </li>#}
+                            <li class="">
+                                <a href="{{ path('document.list') }}">Documents list</a>
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -77,17 +79,6 @@
             </div>
 
             <div class="wrapper wrapper-content animated fadeInRight">
-
-{#                <div class="row wrapper border-bottom white-bg page-heading p-xs">#}
-{#                    <div class="col-md-12 row">#}
-{#                        <div class="col-11">#}
-{#                            <h2 class="m-t-sm m-b-xss">Dashboard</h2>#}
-{#                        </div>#}
-{#                    </div>#}
-
-{#                </div>#}
-
-
 
                 <div class="wrapper wrapper-content">
 

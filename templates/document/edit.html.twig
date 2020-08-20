@@ -24,6 +24,10 @@
                    {{ form_row(form.number) }}
                    {{ form_row(form.documentType) }}
                    {{ form_row(form.attachment) }}
+
+                   {% if filename != null %}
+                   <div class="m-b-md">Actual attachment: {{ filename }}</div>
+                   {% endif %}
                    {{ form_row(form.description) }}
 
                </div>
