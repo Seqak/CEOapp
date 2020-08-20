@@ -6,6 +6,7 @@ use App\Entity\Document;
 use App\Form\DocumentType;
 use App\Repository\DocumentRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -99,6 +100,39 @@ class DocumentController extends AbstractController
         $form = $this->createForm(DocumentType::class, $document);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted() && $form->isValid())
+        {
+            $file = $request->files->get('document')["attachment"];
+
+            if ($file !== null) {
+
+                $uploads_directory = $this->getParameter('uploads_directory');
+                $extension = $request->files->get('document')['attachment']->guessExtension();
+
+                $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . "_" . random_int(1000, 9999) . '.' . $extension;
+
+                $file->move(
+                    $uploads_directory,
+                    $filename
+                );
+
+                $document->setFileName($filename);
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($document);
+                $em->flush();
+
+                $this->addFlash('success', 'Document has been updated');
+                return $this->redirect($this->generateUrl('document.list'));
+            }
+            else{
+
+                $em = $this->getDoctrine()->getManager();
+                $em->persist($document);
+                $em->flush();
+            }
+        }
+
         $filename = $form->getData()->getFileName();
         $documentId = $form->getData()->getId();
 
@@ -111,17 +145,28 @@ class DocumentController extends AbstractController
     }
 
     /**
-     * @Route("/deleteFile/document/{id}", name="deleteFile")
+     * @Route("/delete_file/document/{id}", name="delete_file")
      */
-    public function deleteFile($id, Request $request, DocumentRepository $documentRepository)
+    public function deleteFile($id, DocumentRepository $documentRepository, Filesystem $filesystem)
     {
         $document = $documentRepository->findOneBy(array('id' => $id));
-
+        $filename = $document->getFileName();
         $uploads_directory = $this->getParameter('uploads_directory');
-        $uploads_directory->remove("TEST - PDF_1344.pdf");
 
-        dump($document); die;
+        if ($filename !== null)
+        {
+            $filesystem->remove($uploads_directory . '/' . $filename);
+            $document->setFileName(null);
 
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($document);
+            $em->flush();
+        }
+
+        $this->addFlash('success', 'File has been deleted.');
+        return $this->redirect($this->generateUrl('document.edit', [
+            'id' => $id
+        ]));
     }
 
 }

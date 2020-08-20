@@ -112,4 +112,28 @@
     <script src="{{ asset('assets/js/plugins/touchpunch/jquery.ui.touch-punch.min.js') }}"></script>
     <script src="{{ asset('assets/js/inspinia.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/pace/pace.min.js') }}"></script>
+    <script src="{{ asset('assets/js/plugins/toastr/toastr.min.js') }}"></script>
+
+    {% for message in app.flashes('success') %}
+        <script>
+            toastr.options = {
+                "closeButton": true,
+                "debug": false,
+                "progressBar": true,
+                "preventDuplicates": false,
+                "positionClass": "toast-top-right",
+                "onclick": null,
+                "showDuration": "400",
+                "hideDuration": "1000",
+                "timeOut": "2000",
+                "extendedTimeOut": "1000",
+                "showEasing": "swing",
+                "hideEasing": "linear",
+                "showMethod": "fadeIn",
+                "hideMethod": "fadeOut"
+            }
+
+            toastr.success("{{ message }}");
+        </script>
+    {% endfor %}
 </html>
