@@ -10,7 +10,15 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="stylesheet" href="{{ asset('assets/css/plugins/toastr/toastr.min.css') }}">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+
+            <style>
+                body{
+                    color: #444;
+                }
+            </style>
+
+        {% endblock %}
     </head>
     <body>
 
