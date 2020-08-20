@@ -15,6 +15,14 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class DocumentController extends AbstractController
 {
+
+    private function sendToDatabase($entity)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($entity);
+        $em->flush();
+    }
+
     /**
      * @Route("/add", name="add")
      */
@@ -45,17 +53,13 @@ class DocumentController extends AbstractController
                 $document->setFileName($filename);
                 $document->setAddDate();
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($document);
-                $em->flush();
+                $this->sendToDatabase($document);
             }
             else
             {
                 $document->setAddDate();
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($document);
-                $em->flush();
+                $this->sendToDatabase($document);
             }
 
             $this->addFlash('success', 'The document was added successfully');
@@ -91,8 +95,18 @@ class DocumentController extends AbstractController
     /**
      * @Route("/edit/{id}", name="edit")
      */
-    public function edit($id, Request $request, DocumentRepository $documentRepository)
+    public function edit($id, Request $request, DocumentRepository $documentRepository, Filesystem $filesystem)
     {
+
+        /**
+         *  TO DO:
+         *  1. Sprawdź, czy plik został dodany w formie.
+         *  2. Jeśli tak to nadpisz w encji nazwę starego.
+         *  3. Usuń Stary z folderu
+         *  4. Dodaj nowy do folderu.
+         *  5. Flush
+         */
+
         $document = $documentRepository->findOneBy(array(
             'id' => $id
         ));
@@ -111,25 +125,23 @@ class DocumentController extends AbstractController
 
                 $filename = pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME) . "_" . random_int(1000, 9999) . '.' . $extension;
 
-                $file->move(
-                    $uploads_directory,
-                    $filename
-                );
+                $oldFilename = $document->getFileName();
+
+                if ($oldFilename !== null)
+                {$filesystem->remove($uploads_directory . '/' . $oldFilename);}
+
+                $file->move( $uploads_directory, $filename );
 
                 $document->setFileName($filename);
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($document);
-                $em->flush();
+                $this->sendToDatabase($document);
 
                 $this->addFlash('success', 'Document has been updated');
                 return $this->redirect($this->generateUrl('document.list'));
             }
             else{
 
-                $em = $this->getDoctrine()->getManager();
-                $em->persist($document);
-                $em->flush();
+                $this->sendToDatabase($document);
             }
         }
 
@@ -158,9 +170,7 @@ class DocumentController extends AbstractController
             $filesystem->remove($uploads_directory . '/' . $filename);
             $document->setFileName(null);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($document);
-            $em->flush();
+            $this->sendToDatabase($document);
         }
 
         $this->addFlash('success', 'File has been deleted.');

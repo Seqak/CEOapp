@@ -26,14 +26,15 @@
 
 
                    {% if filename != null %}
-                       {{ form_row(form.attachment, { 'disabled':'disabled' }) }}
-                   <div class="m-b-md"><strong>Current attachment: </strong>{{ filename }}
-                       <a href="{{ path('document.delete_file', {id:  documentId }  ) }}">Delete</a>
-                   </div>
+                       {{ form_row(form.attachment) }}
+                       <div class="m-b-md"><strong>Current attachment: </strong>{{ filename }}
+                           <a class="m-l-md" href="{{ path('document.delete_file', {id:  documentId }  ) }}"><span class="label label-danger">Delete</span></a>
+                       </div>
                    {% else %}
                            {{ form_row(form.attachment) }}
                    {% endif %}
                    {{ form_row(form.description) }}
+
 
                </div>
                <div class="ibox-footer">
