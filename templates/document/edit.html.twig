@@ -26,7 +26,9 @@
                    {{ form_row(form.attachment) }}
 
                    {% if filename != null %}
-                   <div class="m-b-md"><strong>Current attachment: </strong>{{ filename }}</div>
+                   <div class="m-b-md"><strong>Current attachment: </strong>{{ filename }}
+                       <a href="{{ path('document.deleteFile', {id:  documentId }  ) }}">Delete</a>
+                   </div>
                    {% endif %}
                    {{ form_row(form.description) }}
 

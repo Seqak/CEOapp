@@ -100,12 +100,27 @@ class DocumentController extends AbstractController
         $form->handleRequest($request);
 
         $filename = $form->getData()->getFileName();
+        $documentId = $form->getData()->getId();
 
         return $this->render('document/edit.html.twig', [
             'pagename' => 'Edit document',
             'form' => $form->createView(),
-            'filename' => $filename
+            'filename' => $filename,
+            'documentId' => $documentId,
         ]);
+    }
+
+    /**
+     * @Route("/deleteFile/document/{id}", name="deleteFile")
+     */
+    public function deleteFile($id, Request $request, DocumentRepository $documentRepository)
+    {
+        $document = $documentRepository->findOneBy(array('id' => $id));
+
+        $uploads_directory = $this->getParameter('uploads_directory');
+        $uploads_directory->remove("TEST - PDF_1344.pdf");
+
+        dump($document); die;
 
     }
 
