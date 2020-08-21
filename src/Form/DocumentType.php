@@ -23,7 +23,7 @@ class DocumentType extends AbstractType
                 'label' => 'Name*',
                 'constraints' => [
                     new NotBlank([
-                        'message' => 'This field is required.'
+                        'message' => 'This field is required.',
                     ])
                 ]
             ])

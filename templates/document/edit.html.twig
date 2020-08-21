@@ -8,9 +8,6 @@
     .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
 </style>
 
-
-
-
          <div class="col-md-6 col-lg-6 no-paddings">
              {{ form_start(form) }}
             <div class="ibox ">
@@ -19,22 +16,22 @@
                </div>
                <div class="ibox-content">
 
-                {{ form_row(form.name) }}
-
+                   {{ form_row(form.name) }}
                    {{ form_row(form.number) }}
                    {{ form_row(form.documentType) }}
 
-
                    {% if filename != null %}
                        {{ form_row(form.attachment) }}
-                       <div class="m-b-md"><strong>Current attachment: </strong>{{ filename }}
+
+                       <div class="m-t-sm m-b-md"><strong>Current attachment: </strong>{{ filename }}
                            <a class="m-l-md" href="{{ path('document.delete_file', {id:  documentId }  ) }}"><span class="label label-danger">Delete</span></a>
                        </div>
-                   {% else %}
-                           {{ form_row(form.attachment) }}
-                   {% endif %}
-                   {{ form_row(form.description) }}
 
+                   {% else %}
+                       {{ form_row(form.attachment) }}
+                   {% endif %}
+
+                   {{ form_row(form.description) }}
 
                </div>
                <div class="ibox-footer">

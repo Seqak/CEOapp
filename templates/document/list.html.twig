@@ -83,7 +83,7 @@
                             <td class="text-right">
                                 <div class="btn-group">
                                     <a href="{{ path('document.edit', {id: document.id}) }}" class="btn btn-primary btn-sm color-white" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></a>
-                                    <a class="btn btn-danger btn-sm btn-delete-post color-white" data-toggle="tooltip" data-placement="top" title="Delete"><i class="text-light fa fa-trash"></i></a>
+                                    <a href="{{ path('document.delete', {id: document.id} ) }}" class="btn btn-danger btn-sm btn-delete-post color-white" data-toggle="tooltip" data-placement="top" title="Delete"><i class="text-light fa fa-trash"></i></a>
                                 </div>
                             </td>
                         </tr>

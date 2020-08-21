@@ -78,11 +78,9 @@ class DocumentController extends AbstractController
      */
     public function list(DocumentRepository $documentRepository)
     {
-
         $documents = $documentRepository->findBy(array(),
             array( 'addDate' => 'DESC')
         );
-
 
         return $this->render('document/list.html.twig', [
             'pagename' => 'Documents list',
@@ -97,16 +95,6 @@ class DocumentController extends AbstractController
      */
     public function edit($id, Request $request, DocumentRepository $documentRepository, Filesystem $filesystem)
     {
-
-        /**
-         *  TO DO:
-         *  1. Sprawdź, czy plik został dodany w formie.
-         *  2. Jeśli tak to nadpisz w encji nazwę starego.
-         *  3. Usuń Stary z folderu
-         *  4. Dodaj nowy do folderu.
-         *  5. Flush
-         */
-
         $document = $documentRepository->findOneBy(array(
             'id' => $id
         ));
@@ -177,6 +165,36 @@ class DocumentController extends AbstractController
         return $this->redirect($this->generateUrl('document.edit', [
             'id' => $id
         ]));
+    }
+
+    /**
+     * @Route("/delete/{id}", name="delete")
+     */
+    public function delete($id, DocumentRepository $documentRepository, Filesystem $filesystem)
+    {
+        $document = $documentRepository->findOneBy(array(
+            'id' => $id
+        ));
+
+        $filename = $document->getFileName();
+        $uploads_directory = $this->getParameter('uploads_directory');
+
+        if ($filename !== null)
+        {
+            $filesystem->remove($uploads_directory . '/' . $filename);
+
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($document);
+            $em->flush();
+        }
+        else{
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($document);
+            $em->flush();
+        }
+
+        $this->addFlash('success', 'The document was deleted successfully');
+        return $this->redirect($this->generateUrl('document.list'));
     }
 
 }
